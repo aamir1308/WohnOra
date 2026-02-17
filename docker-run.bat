@@ -1,0 +1,3 @@
+@echo off
+echo Starting WohnOra-Germany...
+docker-compose up
