@@ -1,6 +1,17 @@
 # WohnOra-Germany
 
-> Built with **AI Factory v3.3** — 2026-02-17
+A German real estate platform for property listings, search, and management with DE/EN language support.
+
+## Features
+
+- Property listings (rent and buy)
+- Interactive map with OpenStreetMap
+- Advanced property search and filters
+- User authentication with role-based dashboards (seeker/owner)
+- DE/EN language toggle
+- Document upload for property applications
+- Appointments and messaging system
+- Amenities discovery near properties
 
 ## Quick Start
 
@@ -10,35 +21,26 @@ npm run dev
 # → http://localhost:5173
 ```
 
-## Docker
-
-```bash
-docker-run.bat      # Start
-docker-stop.bat     # Stop
-docker-logs.bat     # View logs
-docker-rebuild.bat  # Rebuild
-```
-
-## Auto-commit (every 5 min)
-
-```bash
-git-auto-commit.bat   # Windows
-bash git-auto-commit.sh  # Mac/Linux
-```
-
-## Deploy
+## Build
 
 ```bash
 npm run build
-vercel --prod         # Vercel
-netlify deploy --prod --dir=dist  # Netlify
+npm run preview
 ```
 
-## Logs (all inside this folder)
+## Tech Stack
 
-| File | Contents |
-|------|----------|
-| `APP-BUILD-LOG_*.log` | Build process |
-| `GOOSE-AI-LOG.log` | AI coding decisions |
-| `APPLICATION-REQUIREMENTS.md` | Original PRD |
-| `CHAT-HISTORY.json` | Edit chat history |
+- React 18 + Vite
+- React Router v6
+- Tailwind CSS v4
+- Zustand (state management)
+- Leaflet (maps)
+- Lucide React (icons)
+
+## Color Palette
+
+- Primary: #C1121f (Red)
+- Navy: #003049
+- Accent: #669bbc (Light Blue)
+- Background: #fdf0d5 (Cream)
+- Dark Red: #780000

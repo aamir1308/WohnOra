@@ -61,7 +61,7 @@ export default function Login() {
     setLoading(true)
     setTimeout(() => {
       const userData = { email, role }
-      const r = email === 'eigentuemer@demo.de' ? 'owner' : 'seeker'
+      const r = email.includes('owner') || email.includes('vermieter') ? 'owner' : 'seeker'
       login({ ...userData, role: r })
       setLoading(false)
       navigate(r === 'owner' ? '/ownerdashboard' : '/seekerdashboard')
