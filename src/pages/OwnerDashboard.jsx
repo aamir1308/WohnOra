@@ -4,7 +4,7 @@ import { useAuthStore } from '../store/authStore'
 import { properties, appointments, messages } from '../data/mockData'
 import { Icons } from '../components/Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', text: '#003049', muted: '#666', white: '#fff' }
+const C = { primary: '#00d4a4', greenDeep: '#00b48a', primaryDark: '#0a0a0a', white: '#ffffff', surface: '#f7f7f7', hairline: '#e5e5e5', steel: '#5a5a5c', muted: '#888888', onDark: '#ffffff' }
 
 const TABS = [
   { id: 'overview',  label: 'Übersicht' },
@@ -56,10 +56,10 @@ export default function OwnerDashboard() {
   const unreadCount = myMessages.filter(m => !m.read).length
 
   const inputStyle = {
-    width: '100%', border: '1.5px solid #ddd', borderRadius: 8,
-    padding: '10px 12px', fontSize: 14, outline: 'none', background: C.white, boxSizing: 'border-box'
+    width: '100%', border: '1.5px solid #e5e5e5', borderRadius: 8,
+    padding: '10px 12px', fontSize: 14, outline: 'none', background: C.white, boxSizing: 'border-box', color: '#0a0a0a'
   }
-  const labelStyle = { fontSize: 13, fontWeight: 600, color: C.black, marginBottom: 4, display: 'block' }
+  const labelStyle = { fontSize: 13, fontWeight: 600, color: '#0a0a0a', marginBottom: 4, display: 'block' }
 
   return (
     <div style={{ minHeight: '100vh', background: C.bg }}>
