@@ -5,7 +5,7 @@ import { properties, appointments, messages } from '../data/mockData'
 import PropertyCard from '../components/PropertyCard'
 import { Icons } from '../components/Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', text: '#003049', muted: '#666', white: '#fff' }
+const C = { primary: '#00d4a4', greenDeep: '#00b48a', primaryDark: '#0a0a0a', white: '#ffffff', surface: '#f7f7f7', hairline: '#e5e5e5', steel: '#5a5a5c', muted: '#888888', onDark: '#ffffff', surfaceSoft: '#fafafa' }
 
 const TABS = [
   { id: 'overview',   label: 'Übersicht' },
@@ -17,10 +17,10 @@ const TABS = [
 
 const MOCK_SAVED = properties.slice(0, 4)
 const MOCK_DOCS = [
-  { name: 'Schufa-Auskunft.pdf',    date: '15.01.2026', status: 'Hochgeladen', color: '#2E7D32' },
-  { name: 'Einkommensnachweis.pdf', date: '15.01.2026', status: 'Hochgeladen', color: '#2E7D32' },
-  { name: 'Personalausweis.pdf',    date: '20.01.2026', status: 'Ausstehend',  color: '#E65100' },
-  { name: 'Mietschuldenfreiheit.pdf', date: '—',        status: 'Fehlt',      color: '#C62828' },
+  { name: 'Schufa-Auskunft.pdf',    date: '15.01.2026', status: 'Hochgeladen', color: '#00d4a4' },
+  { name: 'Einkommensnachweis.pdf', date: '15.01.2026', status: 'Hochgeladen', color: '#00d4a4' },
+  { name: 'Personalausweis.pdf',    date: '20.01.2026', status: 'Ausstehend',  color: '#c37d0d' },
+  { name: 'Mietschuldenfreiheit.pdf', date: '—',        status: 'Fehlt',      color: '#d45656' },
 ]
 
 export default function SeekerDashboard() {
@@ -30,7 +30,7 @@ export default function SeekerDashboard() {
 
   if (!isLoggedIn) {
     return (
-      <div style={{ minHeight: '100vh', background: C.cream, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ minHeight: '100vh', background: C.surface, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ background: C.white, borderRadius: 16, padding: 40, textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', maxWidth: 380 }}>
           <Icons.Lock size={48} color={C.primary} style={{ marginBottom: 16 }} />
           <h2 style={{ color: C.primary, marginBottom: 8 }}>Anmeldung erforderlich</h2>
@@ -51,12 +51,12 @@ export default function SeekerDashboard() {
     <div style={{ minHeight: '100vh', background: C.bg }}>
 
       {/* HEADER */}
-      <div style={{ background: 'linear-gradient(135deg, #DD0000, #000000)', padding: '36px 24px 28px' }}>
+      <div style={{ background: 'linear-gradient(135deg, #1a3d4a 0%, #2d5a4f 100%)', padding: '36px 24px 28px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14, marginBottom: 4 }}>Suchenden-Dashboard</div>
             <h1 style={{ color: C.white, fontWeight: 900, fontSize: '1.8rem', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Icons.Users size={24} color={C.accent} /> Hallo, {user?.name || user?.email || 'Suchender'}!
+              <Icons.Users size={24} color={C.primary} /> Hallo, {user?.name || user?.email || 'Suchender'}!
             </h1>
           </div>
           <button onClick={() => { logout(); navigate('/') }} style={{
@@ -95,10 +95,10 @@ export default function SeekerDashboard() {
           <div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 20, marginBottom: 36 }}>
               {[
-                { icon: <Icons.Heart size={24} />, val: MOCK_SAVED.length, label: 'Gespeicherte Inserate', color: '#e91e63' },
+                { icon: <Icons.Heart size={24} />, val: MOCK_SAVED.length, label: 'Gespeicherte Inserate', color: C.primary },
                 { icon: <Icons.Calendar size={24} />, val: myAppointments.length, label: 'Geplante Termine', color: C.primary },
-                { icon: <Icons.FileText size={24} />, val: `${MOCK_DOCS.filter(d=>d.status==='Hochgeladen').length}/${MOCK_DOCS.length}`, label: 'Dokumente vollständig', color: '#1565C0' },
-                { icon: <Icons.MessageCircle size={24} />, val: unreadCount, label: 'Ungelesene Nachrichten', color: C.accent },
+                { icon: <Icons.FileText size={24} />, val: `${MOCK_DOCS.filter(d=>d.status==='Hochgeladen').length}/${MOCK_DOCS.length}`, label: 'Dokumente vollständig', color: C.primaryDark },
+                { icon: <Icons.MessageCircle size={24} />, val: unreadCount, label: 'Ungelesene Nachrichten', color: C.steel },
               ].map(s => (
                 <div key={s.label} style={{ background: C.white, borderRadius: 12, padding: '20px 24px', boxShadow: '0 2px 8px rgba(0,0,0,0.07)', borderTop: `3px solid ${s.color}` }}>
                   <div style={{ marginBottom: 8, color: s.color }}>{s.icon}</div>
@@ -117,7 +117,7 @@ export default function SeekerDashboard() {
                     <div style={{ fontWeight: 600, fontSize: 14 }}>{a.property_title || 'Besichtigung'}</div>
                     <div style={{ fontSize: 13, color: C.muted }}>{a.date} · {a.time}</div>
                   </div>
-                  <span style={{ background: a.status === 'confirmed' ? '#FFF5F5' : '#FFF8F0', color: a.status === 'confirmed' ? C.primary : C.accent, fontSize: 12, padding: '4px 10px', borderRadius: 20, fontWeight: 600 }}>
+                  <span style={{ background: a.status === 'confirmed' ? C.surfaceSoft : C.surface, color: a.status === 'confirmed' ? C.primary : C.steel, fontSize: 12, padding: '4px 10px', borderRadius: 20, fontWeight: 600 }}>
                     <Icons.Check size={12} style={{ marginRight: 4 }} /> {a.status === 'confirmed' ? 'Bestätigt' : 'Ausstehend'}
                   </span>
                 </div>
@@ -132,7 +132,7 @@ export default function SeekerDashboard() {
                 <Icons.FileText size={18} /> Bewerbungsmappe</h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 {MOCK_DOCS.map(d => (
-                  <div key={d.name} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', borderRadius: 8, background: '#FFF5F5', fontSize: 13 }}>
+                  <div key={d.name} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', borderRadius: 8, background: C.surfaceSoft, fontSize: 13 }}>
                     <Icons.Check size={16} color={d.color} />
                     <div>
                       <div style={{ fontWeight: 600 }}>{d.name}</div>
@@ -179,7 +179,7 @@ export default function SeekerDashboard() {
             <div style={{ background: C.white, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.07)', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: '#FFF5F5' }}>
+                  <tr style={{ background: C.surfaceSoft }}>
                     {['Immobilie', 'Datum', 'Uhrzeit', 'Typ', 'Status'].map(h => (
                       <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: 13, fontWeight: 700, color: C.primary }}>{h}</th>
                     ))}
@@ -193,7 +193,7 @@ export default function SeekerDashboard() {
                       <td style={{ padding: '14px 16px', fontSize: 13 }}>{a.time}</td>
                       <td style={{ padding: '14px 16px', fontSize: 13 }}>Besichtigung</td>
                       <td style={{ padding: '14px 16px' }}>
-                        <span style={{ background: a.status === 'confirmed' ? '#FFF5F5' : '#FFF8F0', color: a.status === 'confirmed' ? C.primary : C.accent, fontSize: 12, padding: '4px 10px', borderRadius: 20, fontWeight: 600 }}>
+                        <span style={{ background: a.status === 'confirmed' ? C.surfaceSoft : C.surface, color: a.status === 'confirmed' ? C.primary : C.steel, fontSize: 12, padding: '4px 10px', borderRadius: 20, fontWeight: 600 }}>
                           <Icons.Check size={12} style={{ marginRight: 4 }} /> {a.status === 'confirmed' ? 'Bestätigt' : 'Ausstehend'}
                         </span>
                       </td>
@@ -248,7 +248,7 @@ export default function SeekerDashboard() {
               <Icons.MessageCircle size={24} /> Nachrichten</h2>
             <div style={{ background: C.white, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.07)', overflow: 'hidden' }}>
               {myMessages.map((m, i) => (
-                <div key={i} style={{ padding: '16px 20px', borderBottom: '1px solid #f0f0f0', display: 'flex', gap: 14, alignItems: 'flex-start', background: !m.read ? '#FFF5F5' : C.white }}>
+                <div key={i} style={{ padding: '16px 20px', borderBottom: '1px solid #f0f0f0', display: 'flex', gap: 14, alignItems: 'flex-start', background: !m.read ? C.surfaceSoft : C.white }}>
                   <div style={{ width: 40, height: 40, borderRadius: '50%', background: C.primary, color: C.white, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 16, flexShrink: 0 }}>
                     {(m.sender_name || 'E').charAt(0)}
                   </div>

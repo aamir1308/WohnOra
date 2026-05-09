@@ -4,7 +4,7 @@ import { useAuthStore } from '../store/authStore'
 import { properties, appointments, messages } from '../data/mockData'
 import { Icons } from '../components/Icons'
 
-const C = { primary: '#00d4a4', greenDeep: '#00b48a', primaryDark: '#0a0a0a', white: '#ffffff', surface: '#f7f7f7', hairline: '#e5e5e5', steel: '#5a5a5c', muted: '#888888', onDark: '#ffffff' }
+const C = { primary: '#00d4a4', greenDeep: '#00b48a', primaryDark: '#0a0a0a', white: '#ffffff', surface: '#f7f7f7', hairline: '#e5e5e5', steel: '#5a5a5c', muted: '#888888', onDark: '#ffffff', surfaceSoft: '#fafafa' }
 
 const TABS = [
   { id: 'overview',  label: 'Übersicht' },
@@ -65,12 +65,12 @@ export default function OwnerDashboard() {
     <div style={{ minHeight: '100vh', background: C.bg }}>
 
       {/* HEADER */}
-      <div style={{ background: 'linear-gradient(135deg, #DD0000, #000000)', padding: '36px 24px 28px' }}>
+      <div style={{ background: 'linear-gradient(135deg, #1a3d4a 0%, #2d5a4f 100%)', padding: '36px 24px 28px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14, marginBottom: 4 }}>Eigentümer-Dashboard</div>
             <h1 style={{ color: C.white, fontWeight: 900, fontSize: '1.8rem', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Icons.Home size={24} color={C.accent} /> Willkommen, {user?.name || user?.email || 'Eigentümer'}!
+              <Icons.Home size={24} color={C.primary} /> Willkommen, {user?.name || user?.email || 'Eigentümer'}!
             </h1>
           </div>
           <button onClick={() => { logout(); navigate('/') }} style={{
@@ -110,9 +110,9 @@ export default function OwnerDashboard() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 20, marginBottom: 36 }}>
               {[
                 { icon: <Icons.Building size={24} />, val: MY_LISTINGS.length, label: 'Aktive Inserate', color: C.primary },
-                { icon: <Icons.Eye size={24} />, val: MY_LISTINGS.reduce((a,l) => a + l.views, 0), label: 'Gesamt-Aufrufe', color: '#1565C0' },
-                { icon: <Icons.Mail size={24} />, val: MY_LISTINGS.reduce((a,l) => a + l.inquiries, 0), label: 'Anfragen gesamt', color: C.accent },
-                { icon: <Icons.Calendar size={24} />, val: myAppointments.length, label: 'Termine diese Woche', color: C.black },
+                { icon: <Icons.Eye size={24} />, val: MY_LISTINGS.reduce((a,l) => a + l.views, 0), label: 'Gesamt-Aufrufe', color: C.primaryDark },
+                { icon: <Icons.Mail size={24} />, val: MY_LISTINGS.reduce((a,l) => a + l.inquiries, 0), label: 'Anfragen gesamt', color: C.steel },
+                { icon: <Icons.Calendar size={24} />, val: myAppointments.length, label: 'Termine diese Woche', color: C.primary },
               ].map(s => (
                 <div key={s.label} style={{ background: C.white, borderRadius: 12, padding: '20px 24px', boxShadow: '0 2px 8px rgba(0,0,0,0.07)', borderTop: `3px solid ${s.color}` }}>
                   <div style={{ marginBottom: 8, color: s.color }}>{s.icon}</div>
@@ -174,7 +174,7 @@ export default function OwnerDashboard() {
             <div style={{ background: C.white, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.07)', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: '#FFF5F5' }}>
+                  <tr style={{ background: '#f7f7f7' }}>
                     {['Immobilie', 'Typ', 'Preis', 'Aufrufe', 'Anfragen', 'Status', ''].map(h => (
                       <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: 13, fontWeight: 700, color: C.primary }}>{h}</th>
                     ))}
@@ -200,7 +200,7 @@ export default function OwnerDashboard() {
                       <td style={{ padding: '14px 16px', fontSize: 13 }}>{p.views}</td>
                       <td style={{ padding: '14px 16px', fontSize: 13 }}>{p.inquiries}</td>
                       <td style={{ padding: '14px 16px' }}>
-                        <span style={{ background: '#FFF5F5', color: C.primary, fontSize: 12, padding: '3px 10px', borderRadius: 20, fontWeight: 600 }}>Aktiv</span>
+                        <span style={{ background: '#f7f7f7', color: C.primary, fontSize: 12, padding: '3px 10px', borderRadius: 20, fontWeight: 600 }}>Aktiv</span>
                       </td>
                       <td style={{ padding: '14px 16px' }}>
                         <button onClick={() => navigate('/propertydetail/' + p.id)} style={{ background: C.white, border: `1px solid ${C.primary}`, color: C.primary, borderRadius: 6, padding: '4px 12px', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>
@@ -221,7 +221,7 @@ export default function OwnerDashboard() {
             <h2 style={{ color: C.primary, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 8 }}>
               <Icons.Plus size={24} /> Neues Inserat erstellen</h2>
             {formSaved && (
-              <div style={{ background: '#FFF5F5', border: '1px solid #FFCC00', borderRadius: 10, padding: '14px 20px', marginBottom: 20, color: C.primary, fontWeight: 600 }}>
+              <div style={{ background: '#f7f7f7', border: '1px solid #FFCC00', borderRadius: 10, padding: '14px 20px', marginBottom: 20, color: C.primary, fontWeight: 600 }}>
                 <Icons.Check size={18} style={{ marginRight: 8 }} /> Inserat erfolgreich erstellt! Es wird nach Prüfung veröffentlicht.
               </div>
             )}
@@ -320,7 +320,7 @@ export default function OwnerDashboard() {
                     ['pets_allowed', 'Haustiere'],
                     ['barrier_free', 'Barrierefrei'],
                   ].map(([key, lbl]) => (
-                    <label key={key} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 13, background: form[key] ? '#FFF5F5' : '#f9f9f9', borderRadius: 8, padding: '8px 12px', border: `1px solid ${form[key] ? C.primary : '#e0e0e0'}` }}>
+                    <label key={key} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 13, background: form[key] ? C.surfaceSoft : '#f9f9f9', borderRadius: 8, padding: '8px 12px', border: `1px solid ${form[key] ? C.primary : '#e0e0e0'}` }}>
                       <input type='checkbox' checked={form[key]} onChange={e => handleFormChange(key, e.target.checked)} />
                       {lbl}
                     </label>
@@ -345,7 +345,7 @@ export default function OwnerDashboard() {
             <div style={{ background: C.white, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.07)', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: '#FFF5F5' }}>
+                  <tr style={{ background: '#f7f7f7' }}>
                     {['Interessent', 'Immobilie', 'Datum', 'Uhrzeit', 'Status', 'Aktion'].map(h => (
                       <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: 13, fontWeight: 700, color: C.primary }}>{h}</th>
                     ))}
@@ -359,7 +359,7 @@ export default function OwnerDashboard() {
                       <td style={{ padding: '14px 16px', fontSize: 13 }}>{a.date}</td>
                       <td style={{ padding: '14px 16px', fontSize: 13 }}>{a.time}</td>
                       <td style={{ padding: '14px 16px' }}>
-                        <span style={{ background: a.status === 'confirmed' ? '#FFF5F5' : '#FFF8F0', color: a.status === 'confirmed' ? C.primary : C.accent, fontSize: 12, padding: '4px 10px', borderRadius: 20, fontWeight: 600 }}>
+                        <span style={{ background: a.status === 'confirmed' ? C.surfaceSoft : C.surface, color: a.status === 'confirmed' ? C.primary : C.steel, fontSize: 12, padding: '4px 10px', borderRadius: 20, fontWeight: 600 }}>
                           <Icons.Check size={12} style={{ marginRight: 4 }} /> {a.status === 'confirmed' ? 'Bestätigt' : 'Ausstehend'}
                         </span>
                       </td>
@@ -385,7 +385,7 @@ export default function OwnerDashboard() {
               <Icons.MessageCircle size={24} /> Mieteranfragen</h2>
             <div style={{ background: C.white, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.07)', overflow: 'hidden' }}>
               {myMessages.map((m, i) => (
-                <div key={i} style={{ padding: '16px 20px', borderBottom: '1px solid #f0f0f0', display: 'flex', gap: 14, background: !m.read ? '#FFF5F5' : C.white }}>
+                <div key={i} style={{ padding: '16px 20px', borderBottom: '1px solid #f0f0f0', display: 'flex', gap: 14, background: !m.read ? C.surfaceSoft : C.white }}>
                   <div style={{ width: 44, height: 44, borderRadius: '50%', background: C.primary, color: C.white, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 18, flexShrink: 0 }}>
                     {(m.sender_name || 'S').charAt(0)}
                   </div>
