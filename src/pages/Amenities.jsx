@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import { amenities } from '../data/mockData'
 import { Icons } from '../components/Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', white: '#fff', muted: '#666' }
+const C = { primary: '#0a0a0a', brandGreen: '#00d4a4', white: '#ffffff', surface: '#f7f7f7', steel: '#5a5a5c', ink: '#0a0a0a', hairline: '#e5e5e5' }
 
 const getCategoryIcon = (category) => {
   const iconMap = {
-    'Supermarkt': <Icons.ShoppingCart size={24} color={C.primary} />,
+    'Supermarkt': <Icons.ShoppingCart size={24} color={C.brandGreen} />,
     'Bäckerei': <Icons.Bread size={24} color="#8D6E63" />,
     'Café': <Icons.Coffee size={24} color="#795548" />,
     'Restaurant': <Icons.UtensilsCrossed size={24} color="#E65100" />,
@@ -21,7 +21,7 @@ const getCategoryIcon = (category) => {
     'Kindergarten': <Icons.Baby size={24} color="#F06292" />,
     'Post': <Icons.Mail size={24} color="#455A64" />
   }
-  return iconMap[category] || <Icons.MapPin size={24} color={C.primary} />
+  return iconMap[category] || <Icons.MapPin size={24} color={C.brandGreen} />
 }
 
 export default function Amenities() {
@@ -42,14 +42,14 @@ export default function Amenities() {
   })
 
   return (
-    <div style={{ minHeight: '100vh', background: C.cream }}>
+    <div style={{ minHeight: '100vh', background: C.surface }}>
       <div style={{ 
-        background: `linear-gradient(135deg, ${C.darkRed}, ${C.navy})`, 
-        color: 'white', 
+        background: C.ink, 
+        color: C.white, 
         padding: '16px 24px'
       }}>
         <h1 style={{ margin: 0, fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Icons.MapPin size={24} color={C.accent} /> Umgebung & Annehmlichkeiten
+          <Icons.MapPin size={24} color={C.brandGreen} /> Umgebung & Annehmlichkeiten
         </h1>
         <p style={{ margin: '4px 0 0 0', opacity: 0.9, fontSize: '0.9rem' }}>
           Entdecke Geschäfte, Schulen und Freizeitmöglichkeiten in der Nähe
@@ -67,7 +67,8 @@ export default function Amenities() {
           borderRadius: '12px', 
           padding: '24px', 
           boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
-          marginBottom: '32px'
+          marginBottom: '32px',
+          border: `1px solid ${C.hairline}`
         }}>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'end' }}>
             <div style={{ flex: 1, minWidth: '200px' }}>
@@ -82,9 +83,10 @@ export default function Amenities() {
                 style={{
                   width: '100%',
                   padding: '10px 14px',
-                  border: '1px solid #ddd',
+                  border: `1px solid ${C.hairline}`,
                   borderRadius: '8px',
-                  fontSize: '0.9rem'
+                  fontSize: '0.9rem',
+                  background: C.white
                 }}
               />
             </div>
@@ -99,7 +101,7 @@ export default function Amenities() {
                 style={{
                   width: '100%',
                   padding: '10px 14px',
-                  border: '1px solid #ddd',
+                  border: `1px solid ${C.hairline}`,
                   borderRadius: '8px',
                   fontSize: '0.9rem',
                   background: C.white
@@ -123,7 +125,7 @@ export default function Amenities() {
                 style={{
                   width: '100%',
                   padding: '10px 14px',
-                  border: '1px solid #ddd',
+                  border: `1px solid ${C.hairline}`,
                   borderRadius: '8px',
                   fontSize: '0.9rem',
                   background: C.white
@@ -146,13 +148,14 @@ export default function Amenities() {
               style={{
                 padding: '10px 20px',
                 background: 'transparent',
-                border: '1px solid #ddd',
-                borderRadius: '8px',
+                border: `1px solid ${C.hairline}`,
+                borderRadius: '9999px',
                 fontSize: '0.9rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6
+                gap: 6,
+                color: C.steel
               }}
             >
               <Icons.X size={16} /> Zurücksetzen
@@ -162,7 +165,7 @@ export default function Amenities() {
 
         {/* Results Count */}
         <div style={{ marginBottom: '24px' }}>
-          <h2 style={{ color: C.primary, margin: 0 }}>
+          <h2 style={{ color: C.ink, margin: 0 }}>
             {filteredAmenities.length} Ergebnis{filteredAmenities.length !== 1 ? 'e' : ''}
           </h2>
         </div>
@@ -172,13 +175,14 @@ export default function Amenities() {
           <div style={{ 
             textAlign: 'center', 
             padding: '64px 24px', 
-            color: '#666',
+            color: C.steel,
             background: C.white,
             borderRadius: 12,
-            boxShadow: '0 2px 12px rgba(0,0,0,0.1)'
+            boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
+            border: `1px solid ${C.hairline}`
           }}>
-            <Icons.Search size={48} color={C.primary} style={{ marginBottom: 16 }} />
-            <h3 style={{ color: C.primary, marginBottom: '12px' }}>
+            <Icons.Search size={48} color={C.brandGreen} style={{ marginBottom: 16 }} />
+            <h3 style={{ color: C.ink, marginBottom: '12px' }}>
               Keine Ergebnisse gefunden
             </h3>
             <p>
@@ -199,7 +203,8 @@ export default function Amenities() {
                   borderRadius: '12px', 
                   padding: '20px', 
                   boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
-                  borderLeft: `4px solid ${C.primary}`
+                  border: `1px solid ${C.hairline}`,
+                  borderLeft: `4px solid ${C.brandGreen}`
                 }}
               >
                 <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
@@ -210,13 +215,13 @@ export default function Amenities() {
                     <h3 style={{ 
                       margin: '0 0 4px 0', 
                       fontSize: '1rem', 
-                      color: '#333' 
+                      color: C.ink 
                     }}>
                       {amenity.name}
                     </h3>
                     <div style={{ 
                       fontSize: '0.85rem', 
-                      color: C.primary, 
+                      color: C.brandGreen, 
                       marginBottom: '8px',
                       fontWeight: 600
                     }}>
@@ -224,7 +229,7 @@ export default function Amenities() {
                     </div>
                     <div style={{ 
                       fontSize: '0.85rem', 
-                      color: '#666',
+                      color: C.steel,
                       marginBottom: '8px',
                       display: 'flex',
                       alignItems: 'center',
@@ -235,7 +240,7 @@ export default function Amenities() {
                     {amenity.distance_m && (
                       <div style={{ 
                         fontSize: '0.85rem', 
-                        color: '#666',
+                        color: C.steel,
                         marginBottom: '8px'
                       }}>
                         Entfernung: ~{amenity.distance_m}m
@@ -244,7 +249,7 @@ export default function Amenities() {
                     {amenity.opening_hours && (
                       <div style={{ 
                         fontSize: '0.85rem', 
-                        color: '#666',
+                        color: C.steel,
                         display: 'flex',
                         alignItems: 'center',
                         gap: 4
@@ -260,7 +265,7 @@ export default function Amenities() {
                         alignItems: 'center',
                         gap: 4
                       }}>
-                        <Icons.Star size={14} color={C.accent} fill={C.accent} /> {amenity.rating.toFixed(1)} ({amenity.reviews_count} Bewertungen)
+                        <Icons.Star size={14} color={C.brandGreen} fill={C.brandGreen} /> {amenity.rating.toFixed(1)} ({amenity.reviews_count} Bewertungen)
                       </div>
                     )}
                   </div>

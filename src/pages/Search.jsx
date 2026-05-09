@@ -4,7 +4,7 @@ import { properties } from '../data/mockData'
 import PropertyCard from '../components/PropertyCard'
 import { Icons } from '../components/Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', white: '#fff', muted: '#666' }
+const C = { primary: '#0a0a0a', brandGreen: '#00d4a4', white: '#ffffff', surface: '#f7f7f7', steel: '#5a5a5c', ink: '#0a0a0a', hairline: '#e5e5e5' }
 
 export default function Search() {
   const [query, setQuery] = useState('')
@@ -28,14 +28,14 @@ export default function Search() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: C.cream }}>
+    <div style={{ minHeight: '100vh', background: C.surface }}>
       <div style={{ 
-        background: `linear-gradient(135deg, ${C.darkRed}, ${C.navy})`, 
-        color: 'white', 
+        background: C.ink, 
+        color: C.white, 
         padding: '24px'
       }}>
         <h1 style={{ margin: 0, fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Icons.Search size={24} color={C.accent} /> Immobiliensuche
+          <Icons.Search size={24} color={C.brandGreen} /> Immobiliensuche
         </h1>
       </div>
 
@@ -50,7 +50,8 @@ export default function Search() {
           borderRadius: '12px', 
           padding: '24px', 
           boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
-          marginBottom: '32px'
+          marginBottom: '32px',
+          border: `1px solid ${C.hairline}`
         }}>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'end' }}>
             <div style={{ flex: 1, minWidth: '250px' }}>
@@ -65,9 +66,10 @@ export default function Search() {
                 style={{
                   width: '100%',
                   padding: '12px 16px',
-                  border: '1px solid #ddd',
+                  border: `1px solid ${C.hairline}`,
                   borderRadius: '8px',
-                  fontSize: '1rem'
+                  fontSize: '1rem',
+                  background: C.white
                 }}
               />
             </div>
@@ -76,10 +78,10 @@ export default function Search() {
               type="submit"
               style={{
                 background: C.primary,
-                color: 'white',
+                color: C.white,
                 border: 'none',
                 padding: '12px 24px',
-                borderRadius: '8px',
+                borderRadius: '9999px',
                 fontWeight: 600,
                 fontSize: '1rem',
                 cursor: 'pointer',
@@ -100,10 +102,10 @@ export default function Search() {
               }}
               style={{
                 background: 'transparent',
-                color: C.muted,
-                border: '1px solid #ddd',
+                color: C.steel,
+                border: `1px solid ${C.hairline}`,
                 padding: '12px 24px',
-                borderRadius: '8px',
+                borderRadius: '9999px',
                 fontWeight: 600,
                 fontSize: '1rem',
                 cursor: 'pointer'
@@ -121,13 +123,13 @@ export default function Search() {
           alignItems: 'center', 
           marginBottom: '24px'
         }}>
-          <h2 style={{ color: C.primary, margin: 0 }}>
+          <h2 style={{ color: C.ink, margin: 0 }}>
             {results.length} Ergebnis{results.length !== 1 ? 'e' : ''}
           </h2>
           <Link 
             to='/properties' 
             style={{ 
-              color: C.primary, 
+              color: C.brandGreen, 
               textDecoration: 'underline',
               fontSize: '0.9rem'
             }}
@@ -141,13 +143,14 @@ export default function Search() {
           <div style={{ 
             textAlign: 'center', 
             padding: '64px 24px', 
-            color: '#666',
+            color: C.steel,
             background: C.white,
             borderRadius: 12,
-            boxShadow: '0 2px 12px rgba(0,0,0,0.1)'
+            boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
+            border: `1px solid ${C.hairline}`
           }}>
-            <Icons.Search size={48} color={C.primary} style={{ marginBottom: 16 }} />
-            <h3 style={{ color: C.primary, marginBottom: '12px' }}>
+            <Icons.Search size={48} color={C.brandGreen} style={{ marginBottom: 16 }} />
+            <h3 style={{ color: C.ink, marginBottom: '12px' }}>
               Keine Ergebnisse gefunden
             </h3>
             <p>

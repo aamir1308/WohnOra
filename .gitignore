@@ -35,3 +35,7 @@ Thumbs.db
 
 # Build
 build/
+
+# Design files
+DESIGN.md
+design.md

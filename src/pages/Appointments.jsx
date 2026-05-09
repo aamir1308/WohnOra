@@ -4,7 +4,7 @@ import { useAuthStore } from '../store/authStore'
 import { appointments } from '../data/mockData'
 import { Icons } from '../components/Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', white: '#fff', muted: '#666' }
+const C = { primary: '#0a0a0a', brandGreen: '#00d4a4', white: '#ffffff', surface: '#f7f7f7', steel: '#5a5a5c', ink: '#0a0a0a', hairline: '#e5e5e5' }
 
 export default function Appointments() {
   const { isLoggedIn, user } = useAuthStore()
@@ -16,22 +16,23 @@ export default function Appointments() {
     return (
       <div style={{ 
         minHeight: '100vh', 
-        background: C.cream, 
+        background: C.surface, 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center'
       }}>
         <div style={{ 
           background: C.white, 
-          borderRadius: '16px', 
+          borderRadius: '12px', 
           padding: '40px', 
           textAlign: 'center', 
           boxShadow: '0 4px 20px rgba(0,0,0,0.1)', 
-          maxWidth: '380px'
+          maxWidth: '380px',
+          border: `1px solid ${C.hairline}`
         }}>
-          <Icons.Lock size={48} color={C.primary} style={{ marginBottom: 16 }} />
-          <h2 style={{ color: C.primary, marginBottom: '8px' }}>Anmeldung erforderlich</h2>
-          <p style={{ color: C.muted, marginBottom: '24px' }}>
+          <Icons.Lock size={48} color={C.brandGreen} style={{ marginBottom: 16 }} />
+          <h2 style={{ color: C.ink, marginBottom: '8px' }}>Anmeldung erforderlich</h2>
+          <p style={{ color: C.steel, marginBottom: '24px' }}>
             Bitte melden Sie sich an, um Ihre Termine zu verwalten.
           </p>
           <button 
@@ -40,7 +41,7 @@ export default function Appointments() {
               background: C.primary, 
               color: C.white, 
               border: 'none', 
-              borderRadius: '8px', 
+              borderRadius: '9999px', 
               padding: '12px 32px', 
               fontWeight: 700, 
               cursor: 'pointer', 
@@ -61,14 +62,14 @@ export default function Appointments() {
   })
 
   return (
-    <div style={{ minHeight: '100vh', background: C.bg }}>
+    <div style={{ minHeight: '100vh', background: C.surface }}>
       <div style={{ 
-        background: `linear-gradient(135deg, ${C.darkRed}, ${C.navy})`, 
-        color: 'white', 
+        background: C.ink, 
+        color: C.white, 
         padding: '16px 24px'
       }}>
         <h1 style={{ margin: 0, fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Icons.Calendar size={24} color={C.accent} /> Meine Termine
+          <Icons.Calendar size={24} color={C.brandGreen} /> Meine Termine
         </h1>
         <p style={{ margin: '4px 0 0 0', opacity: 0.9, fontSize: '0.9rem' }}>
           Überblick über deine Besichtigungstermine
@@ -88,7 +89,7 @@ export default function Appointments() {
           gap: '16px', 
           marginBottom: '24px'
         }}>
-          <h2 style={{ color: C.primary, margin: 0 }}>
+          <h2 style={{ color: C.ink, margin: 0 }}>
             Termine ({filteredAppointments.length})
           </h2>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -96,10 +97,10 @@ export default function Appointments() {
               onClick={() => setFilter('all')}
               style={{
                 padding: '8px 16px',
-                border: filter === 'all' ? `2px solid ${C.primary}` : '1px solid #ddd',
+                border: filter === 'all' ? `2px solid ${C.primary}` : `1px solid ${C.hairline}`,
                 background: filter === 'all' ? C.primary : C.white,
-                color: filter === 'all' ? C.white : C.muted,
-                borderRadius: '6px',
+                color: filter === 'all' ? C.white : C.steel,
+                borderRadius: '9999px',
                 fontWeight: 600,
                 cursor: 'pointer'
               }}
@@ -110,10 +111,10 @@ export default function Appointments() {
               onClick={() => setFilter('upcoming')}
               style={{
                 padding: '8px 16px',
-                border: filter === 'upcoming' ? `2px solid ${C.primary}` : '1px solid #ddd',
+                border: filter === 'upcoming' ? `2px solid ${C.primary}` : `1px solid ${C.hairline}`,
                 background: filter === 'upcoming' ? C.primary : C.white,
-                color: filter === 'upcoming' ? C.white : C.muted,
-                borderRadius: '6px',
+                color: filter === 'upcoming' ? C.white : C.steel,
+                borderRadius: '9999px',
                 fontWeight: 600,
                 cursor: 'pointer'
               }}
@@ -124,10 +125,10 @@ export default function Appointments() {
               onClick={() => setFilter('past')}
               style={{
                 padding: '8px 16px',
-                border: filter === 'past' ? `2px solid ${C.primary}` : '1px solid #ddd',
+                border: filter === 'past' ? `2px solid ${C.primary}` : `1px solid ${C.hairline}`,
                 background: filter === 'past' ? C.primary : C.white,
-                color: filter === 'past' ? C.white : C.muted,
-                borderRadius: '6px',
+                color: filter === 'past' ? C.white : C.steel,
+                borderRadius: '9999px',
                 fontWeight: 600,
                 cursor: 'pointer'
               }}
@@ -138,11 +139,11 @@ export default function Appointments() {
           <Link 
             to='/appointments' 
             style={{ 
-              background: C.primary, 
-              color: C.white, 
+              background: C.brandGreen, 
+              color: C.ink, 
               border: 'none', 
               padding: '8px 16px', 
-              borderRadius: '6px', 
+              borderRadius: '9999px', 
               fontWeight: 600,
               textDecoration: 'none',
               display: 'flex',
@@ -159,16 +160,17 @@ export default function Appointments() {
             background: C.white, 
             borderRadius: '12px', 
             overflow: 'hidden', 
-            boxShadow: '0 2px 12px rgba(0,0,0,0.1)'
+            boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
+            border: `1px solid ${C.hairline}`
           }}>
             {filteredAppointments.length === 0 ? (
               <div style={{ 
                 textAlign: 'center', 
                 padding: '48px 24px', 
-                color: C.muted
+                color: C.steel
               }}>
-                <Icons.Calendar size={48} color={C.primary} style={{ marginBottom: 16 }} />
-                <h3 style={{ color: C.primary, marginBottom: '12px' }}>
+                <Icons.Calendar size={48} color={C.brandGreen} style={{ marginBottom: 16 }} />
+                <h3 style={{ color: C.ink, marginBottom: '12px' }}>
                   Keine Termine vorhanden
                 </h3>
                 <p>
@@ -179,10 +181,10 @@ export default function Appointments() {
             ) : (
               <div>
                 {filteredAppointments.map((appointment, index) => {
-                  const bgColor = appointment.status === 'confirmed' ? C.cream : 
+                  const bgColor = appointment.status === 'confirmed' ? C.surface : 
                                  appointment.status === 'cancelled' ? '#FEE2E2' : '#FEF3C7'
-                  const textColor = appointment.status === 'confirmed' ? C.primary : 
-                                   appointment.status === 'cancelled' ? '#C62828' : C.muted
+                  const textColor = appointment.status === 'confirmed' ? C.ink : 
+                                   appointment.status === 'cancelled' ? C.primary : C.steel
                   const statusLabel = appointment.status === 'confirmed' ? 'Bestätigt' : 
                                      appointment.status === 'cancelled' ? 'Abgesagt' : 'Ausstehend'
                   return (
@@ -190,16 +192,16 @@ export default function Appointments() {
                       key={appointment.id} 
                       style={{ 
                         padding: '16px 20px', 
-                        borderBottom: index < filteredAppointments.length - 1 ? '1px solid #eee' : 'none',
+                        borderBottom: index < filteredAppointments.length - 1 ? `1px solid ${C.hairline}` : 'none',
                         background: bgColor
                       }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                         <div>
-                          <div style={{ fontWeight: 600, fontSize: '1.1rem', marginBottom: '4px' }}>
+                          <div style={{ fontWeight: 600, fontSize: '1.1rem', marginBottom: '4px', color: C.ink }}>
                             {appointment.property_title || 'Besichtigungstermin'}
                           </div>
-                          <div style={{ fontSize: '0.9rem', color: '#666', display: 'flex', alignItems: 'center', gap: 4 }}>
+                          <div style={{ fontSize: '0.9rem', color: C.steel, display: 'flex', alignItems: 'center', gap: 4 }}>
                             <Icons.MapPin size={12} /> {appointment.address || 'Adresse nicht angegeben'}
                           </div>
                         </div>
@@ -208,13 +210,13 @@ export default function Appointments() {
                             <div style={{ fontWeight: 600, fontSize: '1.2rem', color: C.primary }}>
                               {appointment.date}
                             </div>
-                            <div style={{ fontSize: '0.9rem', color: '#666' }}>
+                            <div style={{ fontSize: '0.9rem', color: C.steel }}>
                               {appointment.time}
                             </div>
                           </div>
                           <span style={{ 
                             padding: '4px 10px', 
-                            borderRadius: '20px', 
+                            borderRadius: '9999px', 
                             fontSize: '0.85rem', 
                             fontWeight: 600,
                             background: bgColor,
@@ -237,10 +239,11 @@ export default function Appointments() {
             padding: '64px 24px', 
             background: C.white,
             borderRadius: '12px',
-            boxShadow: '0 2px 12px rgba(0,0,0,0.1)'
+            boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
+            border: `1px solid ${C.hairline}`
           }}>
-            <Icons.Calendar size={48} color={C.primary} style={{ marginBottom: 16 }} />
-            <h3 style={{ color: C.primary, marginBottom: '12px' }}>
+            <Icons.Calendar size={48} color={C.brandGreen} style={{ marginBottom: 16 }} />
+            <h3 style={{ color: C.ink, marginBottom: '12px' }}>
               Kalender-Ansicht
             </h3>
             <p>

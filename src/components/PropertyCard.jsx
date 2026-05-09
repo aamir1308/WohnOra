@@ -2,7 +2,17 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Icons } from './Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', white: '#fff', muted: '#666' }
+const C = {
+  primary: '#0a0a0a',
+  brandGreen: '#00d4a4',
+  surface: '#f7f7f7',
+  white: '#ffffff',
+  steel: '#5a5a5c',
+  charcoal: '#1c1c1e',
+  hairline: '#e5e5e5',
+  ink: '#0a0a0a',
+  muted: '#a8a8aa'
+}
 
 export default function PropertyCard({ property }) {
   const navigate = useNavigate()
@@ -39,46 +49,33 @@ export default function PropertyCard({ property }) {
       tabIndex={0}
       role="button"
       aria-label={`${property.title}, ${formatPrice(property.price)} Euro ${isRent ? 'pro Monat' : ''}, ${property.size_sqm} Quadratmeter, ${property.rooms} Zimmer in ${property.city}`}
+      className="property-card"
       style={{
-        background: '#fff', 
-        borderRadius: 12, 
-        overflow: 'hidden',
-        boxShadow: '0 2px 12px rgba(0,48,73,0.1)', 
         cursor: 'pointer',
-        transition: 'transform 0.2s, box-shadow 0.2s',
         display: 'flex', 
         flexDirection: 'column'
-      }}
-      onMouseEnter={e => { 
-        e.currentTarget.style.transform = 'translateY(-4px)'; 
-        e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,48,73,0.15)' 
-      }}
-      onMouseLeave={e => { 
-        e.currentTarget.style.transform = 'translateY(0)'; 
-        e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,48,73,0.1)' 
       }}
     >
       <div style={{ position: 'relative' }}>
         <img
           src={property.image_url}
           alt={`Bild der Immobilie: ${property.title}`}
-          style={{ width: '100%', height: 200, objectFit: 'cover' }}
+          className="property-image"
+          style={{ borderRadius: '12px 12px 0 0' }}
           onError={e => { e.target.src = 'https://picsum.photos/seed/default/800/500' }}
           loading="lazy"
         />
         <span 
           aria-label={isRent ? 'Zur Miete' : 'Zum Kauf'}
+          className="badge"
           style={{
             position: 'absolute', 
             top: 12, 
             left: 12,
-            background: isRent ? C.navy : C.primary,
-            color: '#fff', 
-            padding: '4px 10px', 
-            borderRadius: 20,
-            fontSize: 12, 
-            fontWeight: 700, 
-            letterSpacing: 1
+            background: isRent ? C.primary : C.brandGreen,
+            color: isRent ? C.white : C.primary, 
+            padding: '4px 12px',
+            fontWeight: 600
           }}
         >
           {isRent ? 'MIETEN' : 'KAUFEN'}
@@ -89,65 +86,60 @@ export default function PropertyCard({ property }) {
             position: 'absolute', 
             top: 12, 
             right: 12,
-            background: C.navy, 
-            color: '#fff',
-            padding: '4px 8px', 
+            background: 'rgba(0,0,0,0.6)', 
+            color: C.white,
+            padding: '4px 10px', 
             borderRadius: 6, 
-            fontSize: 11
+            fontSize: 12
           }}
         >
           {typeLabels[property.type] || property.type}
         </span>
       </div>
-      <div style={{ padding: '16px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div aria-label={`Preis: ${formatPrice(property.price)} Euro`} style={{ fontSize: 22, fontWeight: 700, color: C.navy, marginBottom: 4 }}>
+      <div style={{ padding: 20, flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <div aria-label={`Preis: ${formatPrice(property.price)} Euro`} style={{ fontSize: 24, fontWeight: 700, color: C.ink, marginBottom: 4 }}>
           {formatPrice(property.price)} {isRent ? '€/Mon.' : '€'}
         </div>
         {isRent && property.warm_price && (
-          <div style={{ fontSize: 13, color: C.muted, marginBottom: 8 }}>
+          <div style={{ fontSize: 13, color: C.steel, marginBottom: 8 }}>
             Warmmiete: {formatPrice(property.warm_price)} €/Mon.
           </div>
         )}
-        <h3 style={{ fontWeight: 600, fontSize: 15, marginBottom: 6, color: C.navy, lineHeight: 1.3 }}>
+        <h3 style={{ fontWeight: 600, fontSize: 16, marginBottom: 8, color: C.ink, lineHeight: 1.4 }}>
           {property.title}
         </h3>
-        <div style={{ color: C.muted, fontSize: 13, marginBottom: 12 }}>
+        <div style={{ color: C.steel, fontSize: 14, marginBottom: 12 }}>
           {property.postal_code} {property.city}
         </div>
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 'auto' }}>
-          <span aria-label={`${property.rooms} Zimmer`} style={{ fontSize: 13, color: C.navy, display: 'flex', alignItems: 'center', gap: 4 }}>
-            <Icons.Bed size={14} />
+        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginTop: 'auto' }}>
+          <span aria-label={`${property.rooms} Zimmer`} style={{ fontSize: 14, color: C.charcoal, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <Icons.Bed size={16} />
             {property.rooms} Zi.
           </span>
-          <span aria-label={`${property.size_sqm} Quadratmeter`} style={{ fontSize: 13, color: C.navy, display: 'flex', alignItems: 'center', gap: 4 }}>
-            <Icons.Maximize size={14} />
+          <span aria-label={`${property.size_sqm} Quadratmeter`} style={{ fontSize: 14, color: C.charcoal, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <Icons.Maximize size={16} />
             {property.size_sqm} m²
           </span>
           {property.parking && (
-            <span aria-label="Parkplatz vorhanden" style={{ fontSize: 13, color: C.navy, display: 'flex', alignItems: 'center', gap: 4 }}>
-              <Icons.Car size={14} />
+            <span aria-label="Parkplatz vorhanden" style={{ fontSize: 14, color: C.charcoal, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Icons.Car size={16} />
             </span>
           )}
           {property.pets_allowed && (
-            <span aria-label="Haustiere erlaubt" style={{ fontSize: 13, color: C.navy, display: 'flex', alignItems: 'center', gap: 4 }}>
-              <Icons.PawPrint size={14} />
-            </span>
-          )}
-          {property.balcony && (
-            <span aria-label="Balkon oder Terrasse vorhanden" style={{ fontSize: 13, color: C.navy, display: 'flex', alignItems: 'center', gap: 4 }}>
-              <Icons.Leaf size={14} />
+            <span aria-label="Haustiere erlaubt" style={{ fontSize: 14, color: C.charcoal, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Icons.PawPrint size={16} />
             </span>
           )}
         </div>
-        <div style={{ marginTop: 8, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {property.elevator && (
-            <span aria-label="Aufzug vorhanden" style={{ background: C.cream, color: C.navy, fontSize: 11, padding: '2px 6px', borderRadius: 4 }}>Aufzug</span>
+            <span aria-label="Aufzug vorhanden" className="badge" style={{ background: C.surface, color: C.charcoal, fontSize: 12 }}>Aufzug</span>
           )}
           {property.furnished && (
-            <span aria-label="Möbliert" style={{ background: C.accent, color: C.navy, fontSize: 11, padding: '2px 6px', borderRadius: 4 }}>Möbliert</span>
+            <span aria-label="Möbliert" className="badge badge-green" style={{ fontSize: 12 }}>Möbliert</span>
           )}
           {property.barrier_free && (
-            <span aria-label="Barrierefrei" style={{ background: C.cream, color: C.navy, fontSize: 11, padding: '2px 6px', borderRadius: 4 }}>Barrierefrei</span>
+            <span aria-label="Barrierefrei" className="badge" style={{ background: C.surface, color: C.charcoal, fontSize: 12 }}>Barrierefrei</span>
           )}
         </div>
       </div>

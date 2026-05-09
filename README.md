@@ -97,17 +97,30 @@ src/
 - **State**: Zustand with localStorage persistence
 - **Maps**: Leaflet + React-Leaflet + OpenStreetMap
 - **Icons**: Lucide React
-- **HTTP**: Axios
 
-## Color Palette
+## Design System
 
-| Color | Hex | Usage |
+Based on Mintlify's design language with Inter font family.
+
+### Color Palette
+
+| Token | Hex | Usage |
 |-------|-----|-------|
-| Primary Red | `#C1121f` | Buttons, accents |
-| Navy | `#003049` | Headers, text |
-| Light Blue | `#669bbc` | Hover states, accents |
-| Cream | `#fdf0d5` | Background |
-| Dark Red | `#780000` | Dark accents |
+| `--color-primary` | #0a0a0a | Buttons, text |
+| `--color-brand-green` | #00d4a4 | Accent CTAs, success |
+| `--color-canvas` | #ffffff | Page background |
+| `--color-surface` | #f7f7f7 | Cards, sections |
+| `--color-ink` | #0a0a0a | Primary text |
+| `--color-steel` | #5a5a5c | Secondary text |
+| `--color-hairline` | #e5e5e5 | Borders |
+
+### Components
+
+- **btn-primary**: Black pill buttons (#0a0a0a)
+- **btn-accent**: Mint green pill buttons (#00d4a4)
+- **btn-secondary**: Outlined pill buttons
+- **card**: White cards with 12px radius and hairline border
+- **input**: 40px height inputs with 8px radius
 
 ## Environment Variables
 

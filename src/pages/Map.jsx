@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css'
 import { properties } from '../data/mockData'
 import { Icons } from '../components/Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', white: '#fff', muted: '#666' }
+const C = { primary: '#0a0a0a', brandGreen: '#00d4a4', white: '#ffffff', surface: '#f7f7f7', steel: '#5a5a5c', ink: '#0a0a0a', hairline: '#e5e5e5' }
 
 const customIcon = new L.Icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -93,21 +93,21 @@ export default function Map() {
     navigate(`/propertydetail/${id}`)
   }
   
-  return (
+return (
     <div style={{ 
       minHeight: '100vh', 
-      background: C.cream,
+      background: C.surface,
       display: 'flex',
       flexDirection: 'column'
     }}>
       {/* Header */}
       <div style={{ 
-        background: `linear-gradient(135deg, ${C.darkRed}, ${C.navy})`, 
-        color: 'white', 
+        background: C.ink, 
+        color: C.white, 
         padding: '16px 24px'
       }}>
         <h1 style={{ margin: 0, fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Icons.Map size={24} color={C.accent} /> Kartensuche
+          <Icons.Map size={24} color={C.brandGreen} /> Kartensuche
         </h1>
         <p style={{ margin: '4px 0 0 0', opacity: 0.9, fontSize: '0.9rem' }}>
           {filteredProperties.length} Immobilien gefunden
@@ -118,7 +118,7 @@ export default function Map() {
       <div style={{ 
         background: C.white,
         padding: '16px 24px',
-        borderBottom: '1px solid #e0e0e0',
+        borderBottom: `1px solid ${C.hairline}`,
         display: 'flex',
         gap: 12,
         flexWrap: 'wrap',
@@ -133,7 +133,7 @@ export default function Map() {
             style={{
               width: '100%',
               padding: '10px 14px',
-              border: '1px solid #ddd',
+              border: `1px solid ${C.hairline}`,
               borderRadius: 8,
               fontSize: '0.95rem'
             }}
@@ -145,7 +145,7 @@ export default function Map() {
           onChange={(e) => setSelectedCity(e.target.value)}
           style={{
             padding: '10px 14px',
-            border: '1px solid #ddd',
+            border: `1px solid ${C.hairline}`,
             borderRadius: 8,
             fontSize: '0.95rem',
             background: C.white,
@@ -163,7 +163,7 @@ export default function Map() {
           onChange={(e) => setSelectedType(e.target.value)}
           style={{
             padding: '10px 14px',
-            border: '1px solid #ddd',
+            border: `1px solid ${C.hairline}`,
             borderRadius: 8,
             fontSize: '0.95rem',
             background: C.white,
@@ -181,7 +181,7 @@ export default function Map() {
           onChange={(e) => setSelectedCategory(e.target.value)}
           style={{
             padding: '10px 14px',
-            border: '1px solid #ddd',
+            border: `1px solid ${C.hairline}`,
             borderRadius: 8,
             fontSize: '0.95rem',
             background: C.white,
@@ -198,11 +198,11 @@ export default function Map() {
           style={{
             padding: '10px 16px',
             background: 'transparent',
-            border: '1px solid #ddd',
+            border: `1px solid ${C.hairline}`,
             borderRadius: 8,
             fontSize: '0.9rem',
             cursor: 'pointer',
-            color: C.muted
+            color: C.steel
           }}
         >
           <Icons.X size={16} /> Reset
@@ -245,26 +245,26 @@ export default function Map() {
                         onError={(e) => e.target.src = 'https://picsum.photos/seed/map/400/250'}
                       />
                       <div style={{
-                        background: property.category === 'rent' ? C.navy : C.primary,
-                        color: '#fff',
+                        background: property.category === 'rent' ? C.brandGreen : C.primary,
+                        color: C.white,
                         fontSize: 10,
                         padding: '2px 6px',
-                        borderRadius: 10,
+                        borderRadius: 9999,
                         display: 'inline-block',
                         marginBottom: 4
                       }}>
                         {property.category === 'rent' ? 'MIETE' : 'KAUF'}
                       </div>
-                      <h4 style={{ margin: '4px 0', fontSize: '0.85rem', color: '#333', lineHeight: 1.3 }}>
+                      <h4 style={{ margin: '4px 0', fontSize: '0.85rem', color: C.ink, lineHeight: 1.3 }}>
                         {property.title.length > 50 ? property.title.substring(0, 50) + '...' : property.title}
                       </h4>
-                      <p style={{ margin: '4px 0', fontSize: '0.8rem', color: '#666' }}>
+                      <p style={{ margin: '4px 0', fontSize: '0.8rem', color: C.steel }}>
                         {property.city}
                       </p>
                       <p style={{ margin: '4px 0', fontWeight: 700, fontSize: '0.95rem', color: C.primary }}>
                         {formatPrice(property.price, property.category)}
                       </p>
-                      <div style={{ fontSize: '0.75rem', color: '#888', marginTop: 4 }}>
+                      <div style={{ fontSize: '0.75rem', color: C.steel, marginTop: 4 }}>
                         {property.rooms} Zi. · {property.size_sqm} m²
                       </div>
                       <button
@@ -273,10 +273,10 @@ export default function Map() {
                           width: '100%',
                           marginTop: 8,
                           padding: '6px 12px',
-                          background: C.primary,
-                          color: '#fff',
+                          background: C.brandGreen,
+                          color: C.ink,
                           border: 'none',
-                          borderRadius: 4,
+                          borderRadius: 9999,
                           fontSize: '0.8rem',
                           fontWeight: 600,
                           cursor: 'pointer'
@@ -305,7 +305,8 @@ export default function Map() {
               padding: 16,
               zIndex: 1000,
               display: 'flex',
-              gap: 16
+              gap: 16,
+              border: `1px solid ${C.hairline}`
             }}>
               <img 
                 src={selectedProperty.image_url} 
@@ -316,11 +317,11 @@ export default function Map() {
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
                   <span style={{
-                    background: selectedProperty.category === 'rent' ? '#DD0000' : '#000000',
-                    color: '#fff',
+                    background: selectedProperty.category === 'rent' ? C.brandGreen : C.primary,
+                    color: selectedProperty.category === 'rent' ? C.ink : C.white,
                     fontSize: 10,
                     padding: '2px 8px',
-                    borderRadius: 10,
+                    borderRadius: 9999,
                     fontWeight: 700
                   }}>
                     {selectedProperty.category === 'rent' ? 'MIETE' : 'KAUF'}
@@ -329,16 +330,16 @@ export default function Map() {
                     onClick={() => setSelectedProperty(null)}
                     style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}
                   >
-                    <Icons.X size={16} color={C.muted} />
+                    <Icons.X size={16} color={C.steel} />
                   </button>
                 </div>
-                <h3 style={{ margin: '4px 0', fontSize: '1rem', color: '#333', lineHeight: 1.3 }}>
+                <h3 style={{ margin: '4px 0', fontSize: '1rem', color: C.ink, lineHeight: 1.3 }}>
                   {selectedProperty.title}
                 </h3>
-                <p style={{ margin: '4px 0', fontSize: '0.85rem', color: C.muted }}>
+                <p style={{ margin: '4px 0', fontSize: '0.85rem', color: C.steel }}>
                   <Icons.MapPin size={12} style={{ marginRight: 2 }} /> {selectedProperty.city}
                 </p>
-                <p style={{ margin: '4px 0', fontWeight: 700, fontSize: '1.1rem', color: '#DD0000' }}>
+                <p style={{ margin: '4px 0', fontWeight: 700, fontSize: '1.1rem', color: C.primary }}>
                   {formatPrice(selectedProperty.price, selectedProperty.category)}
                 </p>
                 <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
@@ -348,9 +349,9 @@ export default function Map() {
                       flex: 1,
                       padding: '8px 12px',
                       background: C.primary,
-                      color: '#fff',
+                      color: C.white,
                       border: 'none',
-                      borderRadius: 6,
+                      borderRadius: 9999,
                       fontSize: '0.85rem',
                       fontWeight: 600,
                       cursor: 'pointer'
@@ -368,20 +369,20 @@ export default function Map() {
         <div style={{
           width: 340,
           background: C.white,
-          borderLeft: '1px solid #e0e0e0',
+          borderLeft: `1px solid ${C.hairline}`,
           overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column'
         }}>
-          <div style={{ padding: 16, borderBottom: '1px solid #e0e0e0' }}>
-            <h3 style={{ margin: 0, color: C.primary, fontSize: '1rem' }}>
+          <div style={{ padding: 16, borderBottom: `1px solid ${C.hairline}` }}>
+            <h3 style={{ margin: 0, color: C.ink, fontSize: '1rem' }}>
               {filteredProperties.length} Immobilien
             </h3>
           </div>
           
           {filteredProperties.length === 0 ? (
-            <div style={{ padding: 24, textAlign: 'center', color: C.muted }}>
-              <Icons.Search size={40} color={C.primary} style={{ marginBottom: 12 }} />
+            <div style={{ padding: 24, textAlign: 'center', color: C.steel }}>
+              <Icons.Search size={40} color={C.brandGreen} style={{ marginBottom: 12 }} />
               <p>Keine Immobilien gefunden</p>
             </div>
           ) : (
@@ -394,11 +395,11 @@ export default function Map() {
                     padding: 12,
                     borderBottom: '1px solid #f0f0f0',
                     cursor: 'pointer',
-                    background: selectedProperty?.id === property.id ? '#FFF5F5' : 'transparent',
+                    background: selectedProperty?.id === property.id ? C.surface : 'transparent',
                     transition: 'background 0.2s'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#FFF8F8'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = selectedProperty?.id === property.id ? '#FFF5F5' : 'transparent'}
+                  onMouseEnter={(e) => e.currentTarget.style.background = C.surface}
+                  onMouseLeave={(e) => e.currentTarget.style.background = selectedProperty?.id === property.id ? C.surface : 'transparent'}
                 >
                   <div style={{ display: 'flex', gap: 10 }}>
                     <img 
@@ -410,21 +411,21 @@ export default function Map() {
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 4 }}>
                         <span style={{
-                          background: property.category === 'rent' ? C.navy : C.primary,
-                          color: '#fff',
+                          background: property.category === 'rent' ? C.brandGreen : C.primary,
+                          color: property.category === 'rent' ? C.ink : C.white,
                           fontSize: 9,
                           padding: '1px 6px',
-                          borderRadius: 8,
+                          borderRadius: 9999,
                           fontWeight: 700,
                           flexShrink: 0
                         }}>
                           {property.category === 'rent' ? 'MIETE' : 'KAUF'}
                         </span>
                       </div>
-                      <h4 style={{ margin: '4px 0', fontSize: '0.85rem', color: '#333', lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <h4 style={{ margin: '4px 0', fontSize: '0.85rem', color: C.ink, lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {property.title}
                       </h4>
-                      <p style={{ margin: '2px 0', fontSize: '0.8rem', color: C.muted }}>
+                      <p style={{ margin: '2px 0', fontSize: '0.8rem', color: C.steel }}>
                         {property.city}
                       </p>
                       <p style={{ margin: '2px 0', fontWeight: 700, fontSize: '0.95rem', color: C.primary }}>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 import { Icons } from '../components/Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', white: '#fff', muted: '#666' }
+const C = { primary: '#0a0a0a', brandGreen: '#00d4a4', white: '#ffffff', surface: '#f7f7f7', steel: '#5a5a5c', ink: '#0a0a0a', hairline: '#e5e5e5' }
 
 const DOCUMENT_TYPES = [
   { id: 'schufa', name: 'Schufa-Auskunft', description: 'Aktuelle Schufa-Auskunft (nicht älter als 3 Monate)' },
@@ -25,22 +25,23 @@ export default function Upload() {
     return (
       <div style={{ 
         minHeight: '100vh', 
-        background: C.cream, 
+        background: C.surface, 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center'
       }}>
         <div style={{ 
           background: C.white, 
-          borderRadius: '16px', 
+          borderRadius: '12px', 
           padding: '40px', 
           textAlign: 'center', 
           boxShadow: '0 4px 20px rgba(0,0,0,0.1)', 
-          maxWidth: '380px'
+          maxWidth: '380px',
+          border: `1px solid ${C.hairline}`
         }}>
-          <Icons.Lock size={48} color={C.primary} style={{ marginBottom: 16 }} />
-          <h2 style={{ color: C.primary, marginBottom: '8px' }}>Anmeldung erforderlich</h2>
-          <p style={{ color: C.muted, marginBottom: '24px' }}>
+          <Icons.Lock size={48} color={C.brandGreen} style={{ marginBottom: 16 }} />
+          <h2 style={{ color: C.ink, marginBottom: '8px' }}>Anmeldung erforderlich</h2>
+          <p style={{ color: C.steel, marginBottom: '24px' }}>
             Bitte melden Sie sich an, um Dokumente hochzuladen.
           </p>
           <button 
@@ -49,7 +50,7 @@ export default function Upload() {
               background: C.primary, 
               color: C.white, 
               border: 'none', 
-              borderRadius: '8px', 
+              borderRadius: '9999px', 
               padding: '12px 32px', 
               fontWeight: 700, 
               cursor: 'pointer', 
@@ -95,14 +96,14 @@ export default function Upload() {
   const progress = Math.round(uploadedCount / DOCUMENT_TYPES.length * 100)
 
   return (
-    <div style={{ minHeight: '100vh', background: C.bg }}>
+    <div style={{ minHeight: '100vh', background: C.surface }}>
       <div style={{ 
-        background: `linear-gradient(135deg, ${C.darkRed}, ${C.navy})`, 
-        color: 'white', 
+        background: C.ink, 
+        color: C.white, 
         padding: '16px 24px'
       }}>
         <h1 style={{ margin: 0, fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Icons.Upload size={24} color={C.accent} /> Dokumente hochladen
+          <Icons.Upload size={24} color={C.brandGreen} /> Dokumente hochladen
         </h1>
         <p style={{ margin: '4px 0 0 0', opacity: 0.9, fontSize: '0.9rem' }}>
           Lade deine Unterlagen für die Bewerbungsmappe hoch
@@ -120,7 +121,8 @@ export default function Upload() {
           borderRadius: '12px', 
           padding: '24px', 
           boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
-          marginBottom: '32px'
+          marginBottom: '32px',
+          border: `1px solid ${C.hairline}`
         }}>
           <div style={{ 
             display: 'flex', 
@@ -132,7 +134,7 @@ export default function Upload() {
               Vollständigkeit der Bewerbungsmappe
             </span>
             <span style={{ 
-              color: C.primary, 
+              color: C.brandGreen, 
               fontWeight: 700, 
               fontSize: '1.1rem'
             }}>
@@ -140,13 +142,13 @@ export default function Upload() {
             </span>
           </div>
           <div style={{ 
-            background: '#e0e0e0', 
+            background: C.hairline, 
             borderRadius: '8px', 
             height: '12px',
             overflow: 'hidden'
           }}>
             <div style={{ 
-              background: C.primary, 
+              background: C.brandGreen, 
               borderRadius: '8px', 
               height: '100%', 
               width: `${progress}%`,
@@ -171,23 +173,24 @@ export default function Upload() {
                   borderRadius: '12px', 
                   padding: '24px', 
                   boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
-                  borderLeft: `4px solid ${uploaded ? C.primary : '#ddd'}`
+                  border: `1px solid ${C.hairline}`,
+                  borderLeft: `4px solid ${uploaded ? C.brandGreen : C.hairline}`
                 }}
               >
                 <h3 style={{ 
                   margin: '0 0 8px 0', 
                   fontSize: '1.1rem', 
-                  color: '#333',
+                  color: C.ink,
                   display: 'flex',
                   alignItems: 'center',
                   gap: 8
                 }}>
-                  <Icons.FileText size={18} color={C.primary} /> {doc.name}
+                  <Icons.FileText size={18} color={C.brandGreen} /> {doc.name}
                 </h3>
                 <p style={{ 
                   margin: '0 0 16px 0', 
                   fontSize: '0.9rem', 
-                  color: '#666',
+                  color: C.steel,
                   lineHeight: 1.5
                 }}>
                   {doc.description}
@@ -196,7 +199,7 @@ export default function Upload() {
                 {uploaded ? (
                   <div style={{ 
                     padding: '12px 16px', 
-                    background: C.cream, 
+                    background: C.surface, 
                     borderRadius: '8px'
                   }}>
                     <div style={{ 
@@ -205,17 +208,17 @@ export default function Upload() {
                       gap: '8px',
                       marginBottom: '4px'
                     }}>
-                      <Icons.Check size={18} color={C.primary} />
+                      <Icons.Check size={18} color={C.brandGreen} />
                       <span style={{ 
                         fontWeight: 600, 
-                        color: C.primary
+                        color: C.ink
                       }}>
                         {uploaded.name}
                       </span>
                     </div>
                     <div style={{ 
                       fontSize: '0.8rem', 
-                      color: '#666',
+                      color: C.steel,
                       marginLeft: '26px'
                     }}>
                       {formatFileSize(uploaded.size)} • {uploaded.date}
@@ -231,7 +234,7 @@ export default function Upload() {
                         marginLeft: '26px',
                         background: 'transparent',
                         border: 'none',
-                        color: '#C62828',
+                        color: C.primary,
                         fontSize: '0.85rem',
                         cursor: 'pointer',
                         textDecoration: 'underline',
@@ -250,7 +253,7 @@ export default function Upload() {
                     onDrop={(e) => handleDrop(e, doc.id)}
                     onClick={() => fileInputRef.current?.click()}
                     style={{
-                      border: `2px dashed ${dragging ? C.primary : '#ddd'}`,
+                      border: `2px dashed ${dragging ? C.brandGreen : C.hairline}`,
                       borderRadius: '8px',
                       padding: '24px',
                       textAlign: 'center',
@@ -265,10 +268,10 @@ export default function Upload() {
                       style={{ display: 'none' }}
                       accept=".pdf,.jpg,.jpeg,.png"
                     />
-                    <Icons.Upload size={32} color={C.primary} style={{ marginBottom: 8 }} />
+                    <Icons.Upload size={32} color={C.brandGreen} style={{ marginBottom: 8 }} />
                     <div style={{ 
                       fontSize: '0.9rem', 
-                      color: '#666',
+                      color: C.steel,
                       marginBottom: '4px'
                     }}>
                       Datei hierher ziehen oder klicken
@@ -295,7 +298,7 @@ export default function Upload() {
               color: C.white,
               border: 'none',
               padding: '14px 32px',
-              borderRadius: '8px',
+              borderRadius: '9999px',
               fontWeight: 700,
               fontSize: '1rem',
               cursor: 'pointer',

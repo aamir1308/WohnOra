@@ -4,7 +4,14 @@ import { useAuthStore } from '../store/authStore'
 import { useLanguage } from '../i18n/LanguageContext'
 import { Icons } from './Icons'
 
-const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', white: '#fff', muted: '#666' }
+const C = {
+  primary: '#0a0a0a',
+  brandGreen: '#00d4a4',
+  white: '#ffffff',
+  steel: '#5a5a5c',
+  surface: '#f7f7f7',
+  hairline: '#e5e5e5'
+}
 
 export default function Navbar() {
   const { isLoggedIn, user, role, logout } = useAuthStore()
@@ -16,9 +23,21 @@ export default function Navbar() {
     navigate('/')
   }
 
-  const roleBadge = {
-    seeker: { label: t('nav.seeker'), color: '#C1121f' },
-    owner: { label: t('nav.owner'), color: '#669bbc' }
+  const navLinkStyle = {
+    color: C.white,
+    fontWeight: 500,
+    fontSize: 14,
+    padding: '8px 16px',
+    borderRadius: 6,
+    transition: 'background 0.15s ease',
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 8
+  }
+
+  const navLinkHoverStyle = {
+    background: 'rgba(255,255,255,0.1)'
   }
 
   return (
@@ -32,31 +51,32 @@ export default function Navbar() {
         right: 0,
         zIndex: 1000,
         height: 64,
-        background: C.navy,
+        background: C.primary,
         display: 'flex',
         alignItems: 'center',
-        padding: '0 24px',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+        padding: '0 32px',
+        borderBottom: `1px solid ${C.hairline}`
       }}
     >
       <Link 
         to='/' 
         aria-label="WohnOra - Home"
         style={{
-          color: C.accent,
-          fontWeight: 800,
-          fontSize: 22,
+          color: C.brandGreen,
+          fontWeight: 700,
+          fontSize: 20,
           textDecoration: 'none',
-          marginRight: 24,
+          marginRight: 40,
           whiteSpace: 'nowrap',
           display: 'flex',
           alignItems: 'center',
-          gap: 8
+          gap: 10
         }}
       >
-        <Icons.Home size={24} />
+        <Icons.Home size={22} />
         WohnOra
       </Link>
+      
       <div 
         style={{
           display: 'flex',
@@ -67,96 +87,31 @@ export default function Navbar() {
         role="menubar"
         aria-label="Main menu"
       >
-        <Link 
-          to='/properties' 
-          role="menuitem"
-          style={{
-            color: C.white,
-            fontWeight: 500,
-            padding: '6px 12px',
-            borderRadius: 6,
-            transition: 'background 0.2s',
-            textDecoration: 'none',
-            fontSize: 15,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6
-          }}
-          onMouseEnter={e => e.target.style.background = 'rgba(102,155,188,0.2)'} 
-          onMouseLeave={e => e.target.style.background = 'transparent'}
-        >
-          <Icons.Building size={18} />
-          {t('nav.properties')}
-        </Link>
-        <Link 
-          to='/search' 
-          role="menuitem"
-          style={{
-            color: C.white,
-            fontWeight: 500,
-            padding: '6px 12px',
-            borderRadius: 6,
-            transition: 'background 0.2s',
-            textDecoration: 'none',
-            fontSize: 15,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6
-          }}
-          onMouseEnter={e => e.target.style.background = 'rgba(102,155,188,0.2)'} 
-          onMouseLeave={e => e.target.style.background = 'transparent'}
-        >
-          <Icons.Search size={18} />
-          {t('nav.search')}
-        </Link>
-        <Link 
-          to='/map' 
-          role="menuitem"
-          style={{
-            color: C.white,
-            fontWeight: 500,
-            padding: '6px 12px',
-            borderRadius: 6,
-            transition: 'background 0.2s',
-            textDecoration: 'none',
-            fontSize: 15,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6
-          }}
-          onMouseEnter={e => e.target.style.background = 'rgba(102,155,188,0.2)'} 
-          onMouseLeave={e => e.target.style.background = 'transparent'}
-        >
-          <Icons.Map size={18} />
-          {t('nav.map')}
-        </Link>
-        <Link 
-          to='/amenities' 
-          role="menuitem"
-          style={{
-            color: C.white,
-            fontWeight: 500,
-            padding: '6px 12px',
-            borderRadius: 6,
-            transition: 'background 0.2s',
-            textDecoration: 'none',
-            fontSize: 15,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6
-          }}
-          onMouseEnter={e => e.target.style.background = 'rgba(102,155,188,0.2)'} 
-          onMouseLeave={e => e.target.style.background = 'transparent'}
-        >
-          <Icons.MapPin size={18} />
-          {t('nav.amenities')}
-        </Link>
+        {[
+          { to: '/properties', icon: Icons.Building, label: t('nav.properties') },
+          { to: '/search', icon: Icons.Search, label: t('nav.search') },
+          { to: '/map', icon: Icons.Map, label: t('nav.map') },
+          { to: '/amenities', icon: Icons.MapPin, label: t('nav.amenities') }
+        ].map(({ to, icon: Icon, label }) => (
+          <Link 
+            key={to}
+            to={to} 
+            role="menuitem"
+            style={navLinkStyle}
+            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'} 
+            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+          >
+            <Icon size={18} />
+            {label}
+          </Link>
+        ))}
       </div>
+      
       <div 
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 10,
+          gap: 12,
           marginLeft: 'auto'
         }}
         role="toolbar"
@@ -166,19 +121,16 @@ export default function Navbar() {
         <button
           onClick={toggleLanguage}
           aria-label={`Switch to ${language === 'de' ? 'English' : 'Deutsch'}`}
+          className="btn-secondary"
           style={{
-            background: 'transparent',
-            border: '1px solid rgba(255,255,255,0.5)',
-            color: C.white,
-            padding: '6px 12px',
-            borderRadius: 6,
-            fontWeight: 600,
-            fontSize: 14,
-            cursor: 'pointer',
+            padding: '8px 14px',
+            fontSize: 13,
             display: 'flex',
             alignItems: 'center',
             gap: 6,
-            minWidth: 60
+            minWidth: 64,
+            color: C.white,
+            borderColor: 'rgba(255,255,255,0.3)'
           }}
         >
           <Icons.Globe size={16} />
@@ -187,26 +139,24 @@ export default function Navbar() {
 
         {isLoggedIn ? (
           <>
-            {role && roleBadge[role] && (
+            {role && (
               <span 
                 role="status"
-                aria-label={`Logged in as ${roleBadge[role].label}`}
+                aria-label={`Logged in as ${role}`}
+                className="badge badge-green"
                 style={{
-                  background: roleBadge[role].color,
-                  color: role === 'owner' ? C.black : C.white,
-                  padding: '3px 10px',
-                  borderRadius: 12,
-                  fontSize: 12,
-                  fontWeight: 600
+                  background: C.brandGreen,
+                  color: C.primary,
+                  padding: '4px 12px'
                 }}
               >
-                {roleBadge[role].label}
+                {role === 'owner' ? t('nav.owner') : t('nav.seeker')}
               </span>
             )}
             <span 
               aria-label={`User: ${user?.name || user?.email}`}
               style={{
-                color: C.white,
+                color: C.steel,
                 fontSize: 14
               }}
             >
@@ -216,16 +166,16 @@ export default function Navbar() {
               to={role === 'owner' ? '/ownerdashboard' : '/seekerdashboard'} 
               aria-label="Go to Dashboard"
               style={{
-                background: 'rgba(102,155,188,0.2)',
-                color: C.accent,
-                padding: '6px 14px',
+                background: 'rgba(255,255,255,0.1)',
+                color: C.white,
+                padding: '8px 16px',
                 borderRadius: 6,
-                fontWeight: 600,
+                fontWeight: 500,
                 fontSize: 14,
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6
+                gap: 8
               }}
             >
               <Icons.LayoutDashboard size={16} />
@@ -234,21 +184,13 @@ export default function Navbar() {
             <button 
               onClick={handleLogout} 
               aria-label="Logout"
+              className="btn-primary"
               style={{
-                background: C.primary,
-                color: C.white,
-                border: 'none',
-                padding: '6px 14px',
-                borderRadius: 6,
-                fontWeight: 600,
-                fontSize: 14,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
+                padding: '8px 16px',
+                fontSize: 14
               }}
             >
-              <Icons.LogOut size={16} />
+              <Icons.LogOut size={16} style={{ marginRight: 6 }} />
               {t('nav.logout')}
             </button>
           </>
@@ -259,15 +201,15 @@ export default function Navbar() {
               aria-label="Login"
               style={{
                 color: C.white,
-                border: '1px solid rgba(255,255,255,0.5)',
-                padding: '6px 14px',
+                border: '1px solid rgba(255,255,255,0.3)',
+                padding: '8px 16px',
                 borderRadius: 6,
                 fontWeight: 500,
                 fontSize: 14,
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6
+                gap: 8
               }}
             >
               <Icons.LogIn size={16} />
@@ -276,17 +218,14 @@ export default function Navbar() {
             <Link 
               to='/register' 
               aria-label="Register"
+              className="btn-accent"
               style={{
-                background: C.accent,
-                color: C.navy,
-                padding: '6px 14px',
-                borderRadius: 6,
-                fontWeight: 600,
+                padding: '8px 16px',
                 fontSize: 14,
-                textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6
+                gap: 8,
+                textDecoration: 'none'
               }}
             >
               <Icons.UserPlus size={16} />

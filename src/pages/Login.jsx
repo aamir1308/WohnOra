@@ -4,6 +4,17 @@ import { useAuthStore } from '../store/authStore'
 import { validators } from '../utils/validation'
 import { Icons } from '../components/Icons'
 
+const C = {
+  primary: '#0a0a0a',
+  brandGreen: '#00d4a4',
+  white: '#ffffff',
+  surface: '#f7f7f7',
+  steel: '#5a5a5c',
+  ink: '#0a0a0a',
+  hairline: '#e5e5e5',
+  error: '#d45656'
+}
+
 export default function Login() {
   const [tab, setTab] = useState('password')
   const [email, setEmail] = useState('')
@@ -97,54 +108,54 @@ export default function Login() {
 
   const getInputStyle = (fieldName) => ({
     width: '100%',
-    padding: '10px 14px',
-    border: touched[fieldName] && errors[fieldName] ? '2px solid #C62828' : '1px solid #ccc',
+    padding: '12px 16px',
+    border: touched[fieldName] && errors[fieldName] ? `2px solid ${C.error}` : `1px solid ${C.hairline}`,
     borderRadius: 8,
-    fontSize: 15,
+    fontSize: 16,
     outline: 'none',
     marginBottom: 4,
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    transition: 'border-color 0.15s ease'
   })
 
   const getErrorStyle = () => ({
-    color: '#C62828',
-    fontSize: '0.8rem',
+    color: C.error,
+    fontSize: 13,
     marginBottom: 8,
-    marginTop: 0
+    marginTop: 4
   })
-
-  const C = { primary: '#C1121f', darkRed: '#780000', accent: '#669bbc', cream: '#fdf0d5', navy: '#003049', white: '#fff', muted: '#666' }
 
   const btnStyle = {
     width: '100%',
     padding: '12px',
-    background: loading ? C.primary + '88' : C.primary,
-    color: '#fff',
+    background: loading ? C.brandGreen + '88' : C.brandGreen,
+    color: C.primary,
     border: 'none',
-    borderRadius: 8,
-    fontSize: 16,
-    fontWeight: 700,
+    borderRadius: 9999,
+    fontSize: 14,
+    fontWeight: 500,
     cursor: loading ? 'not-allowed' : 'pointer',
     opacity: loading ? 0.7 : 1
   }
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 64px)', background: C.cream, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-      <div style={{ background: '#fff', borderRadius: 16, padding: 40, width: '100%', maxWidth: 440, boxShadow: '0 4px 24px rgba(0,0,0,0.1)' }}>
-        <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <Icons.Home size={36} color={C.primary} style={{ marginBottom: 8 }} />
-          <h1 style={{ fontSize: 26, fontWeight: 800, color: C.primary, margin: 0 }}>WohnOra</h1>
-          <p style={{ color: C.muted, marginTop: 6 }}>Bei Ihrem Konto anmelden</p>
+    <div style={{ minHeight: 'calc(100vh - 64px)', background: C.surface, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <div className='card' style={{ width: '100%', maxWidth: 440, padding: 40 }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <Icons.Home size={40} color={C.brandGreen} style={{ marginBottom: 12 }} />
+          <h1 style={{ fontSize: 28, fontWeight: 600, color: C.ink, margin: '0 0 8px 0' }}>WohnOra</h1>
+          <p style={{ color: C.steel, fontSize: 15 }}>Bei Ihrem Konto anmelden</p>
         </div>
 
-        <div style={{ marginBottom: 20 }}>
-          <label style={{ fontSize: 14, color: C.black, fontWeight: 600, display: 'block', marginBottom: 6 }}>Ich melde mich an als:</label>
+        <div style={{ marginBottom: 24 }}>
+          <label style={{ fontSize: 14, color: C.ink, fontWeight: 500, display: 'block', marginBottom: 8 }}>Ich melde mich an als:</label>
           <div style={{ display: 'flex', gap: 8 }}>
             {['seeker','owner'].map(r => (
               <button key={r} onClick={() => setRole(r)} style={{
-                flex: 1, padding: '8px', border: '2px solid ' + (role === r ? C.primary : '#ddd'),
-                borderRadius: 8, background: form.role === r ? C.cream : '#fff',
-                color: form.role === r ? C.primary : C.muted, fontWeight: role === r ? 700 : 400, cursor: 'pointer'
+                flex: 1, padding: '12px', border: `2px solid ${role === r ? C.brandGreen : C.hairline}`,
+                borderRadius: 8, background: role === r ? C.surface : C.white,
+                color: role === r ? C.brandGreen : C.steel, fontWeight: role === r ? 600 : 400, cursor: 'pointer',
+                transition: 'all 0.15s ease'
               }}>
                 {r === 'seeker' ? 'Suchender' : 'Eigentümer'}
               </button>
@@ -152,22 +163,24 @@ export default function Login() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', marginBottom: 24, border: '1px solid #e0e0e0', borderRadius: 8, overflow: 'hidden' }}>
+        <div style={{ display: 'flex', marginBottom: 24, border: `1px solid ${C.hairline}`, borderRadius: 8, overflow: 'hidden' }}>
           {['password','otp'].map(t => (
             <button key={t} onClick={() => { setTab(t); setErrors({}); setOtpSent(false); setTouched({}) }} style={{
-              flex: 1, padding: '10px', border: 'none',
-              background: tab === t ? C.primary : '#f5f5f5',
-              color: tab === t ? '#fff' : C.muted, fontWeight: tab === t ? 700 : 400, cursor: 'pointer'
+              flex: 1, padding: '12px', border: 'none',
+              background: tab === t ? C.primary : C.surface,
+              color: tab === t ? C.white : C.steel, fontWeight: tab === t ? 500 : 400, cursor: 'pointer',
+              fontSize: 14
             }}>
-              {t === 'password' ? 'Passwort Login' : 'OTP Login'}
+              {t === 'password' ? 'Passwort' : 'OTP'}
             </button>
           ))}
         </div>
 
         {tab === 'password' ? (
           <form onSubmit={handlePasswordLogin}>
-            <div style={{ marginBottom: 12 }}>
+            <div style={{ marginBottom: 16 }}>
               <input 
+                className='input'
                 style={getInputStyle('email')} 
                 type='email' 
                 placeholder='E-Mail Adresse' 
@@ -178,8 +191,9 @@ export default function Login() {
               />
               {touched.email && errors.email && <p style={getErrorStyle()}>{errors.email}</p>}
             </div>
-            <div style={{ marginBottom: 12 }}>
+            <div style={{ marginBottom: 20 }}>
               <input 
+                className='input'
                 style={getInputStyle('password')} 
                 type='password' 
                 placeholder='Passwort' 
@@ -196,8 +210,9 @@ export default function Login() {
           </form>
         ) : (
           <form onSubmit={otpSent ? handleOtpConfirm : handleOtpSend}>
-            <div style={{ marginBottom: 12 }}>
+            <div style={{ marginBottom: 16 }}>
               <input 
+                className='input'
                 style={getInputStyle('email')} 
                 type='email' 
                 placeholder='E-Mail Adresse' 
@@ -211,9 +226,10 @@ export default function Login() {
             </div>
             {otpSent && (
               <>
-                <p style={{ color: C.primary, fontSize: 14, marginBottom: 8 }}>OTP wurde an {email} gesendet.</p>
-                <div style={{ marginBottom: 12 }}>
+                <p style={{ color: C.brandGreen, fontSize: 14, marginBottom: 8 }}>OTP wurde an {email} gesendet.</p>
+                <div style={{ marginBottom: 20 }}>
                   <input 
+                    className='input'
                     style={getInputStyle('otp')} 
                     type='text' 
                     placeholder='6-stelliger OTP Code' 
@@ -228,14 +244,14 @@ export default function Login() {
               </>
             )}
             <button type='submit' style={btnStyle} disabled={loading}>
-              {loading ? 'Bitte warten...' : otpSent ? 'OTP Bestaetigen' : 'OTP Senden'}
+              {loading ? 'Bitte warten...' : otpSent ? 'OTP Bestätigen' : 'OTP Senden'}
             </button>
           </form>
         )}
 
-        <p style={{ textAlign: 'center', marginTop: 20, color: '#666', fontSize: 14 }}>
+        <p style={{ textAlign: 'center', marginTop: 24, color: C.steel, fontSize: 14 }}>
           Noch kein Konto?{' '}
-          <Link to='/register' style={{ color: C.primary, fontWeight: 600 }}>Jetzt registrieren</Link>
+          <Link to='/register' style={{ color: C.brandGreen, fontWeight: 600 }}>Jetzt registrieren</Link>
         </p>
       </div>
     </div>
